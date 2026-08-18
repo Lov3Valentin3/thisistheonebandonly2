@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { elves } from "@/db/schema";
 import { getChildSession } from "@/lib/auth";
 import { Scene, TopBar } from "@/components/magic";
-import { ElfChooser } from "@/components/elf-chooser";
+import { ElfChooser } from "@/components/elf-choose";
 export const metadata = { title: "Choose Your Elf Friend" };
 export const dynamic = "force-dynamic";
 export default async function ChooseElfPage() {
