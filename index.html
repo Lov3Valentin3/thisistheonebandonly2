@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Elf Pen Pal | Magical Letters from the North Pole</title>
+  <meta name="description" content="A magical Christmas pen pal world where children write letters to an elf friend at the North Pole. Elf mail, Santa letters, and Christmas magic for kids." />
+  <meta name="keywords" content="Elf Pen Pal, Letters from the North Pole, Santa Letters, Christmas App for Kids, Elf Friend, Santa Pen Pal, Christmas Magic, North Pole Letters, Elf Mail, Santa's Workshop" />
+  <meta name="theme-color" content="#6d0b18" />
+  <meta property="og:title" content="Elf Pen Pal | Magical Letters from the North Pole" />
+  <meta property="og:description" content="A beautiful letter is already waiting. Become an elf's pen pal." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/share-card.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="manifest" href="public/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:wght@600;700&family=Great+Vibes&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --red:#b11226; --green:#14532d; --gold:#e0b14a; --cream:#fff6ea; --ink:#3b2416; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Nunito, sans-serif;
+      color: var(--cream);
+      background:
+        linear-gradient(180deg, rgba(7,4,10,.35), rgba(7,4,10,.82)),
+        radial-gradient(circle at 20% 10%, #5b21b6 0%, transparent 32%),
+        radial-gradient(circle at 80% 0%, #b11226 0%, transparent 28%),
+        #07040a;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 22px 18px 60px; position: relative; z-index: 2; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+    .brand { display: flex; gap: 10px; align-items: center; }
+    .seal { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--red); box-shadow: 0 0 18px rgba(225,29,72,.45); }
+    h1, h2, .display { font-family: "Cinzel Decorative", serif; }
+    .script { font-family: "Great Vibes", cursive; }
+    .letter-font { font-family: "Cormorant Garamond", serif; }
+    .hero { display: grid; gap: 24px; }
+    @media (min-width: 860px) { .hero { grid-template-columns: 1.05fr .95fr; align-items: center; } }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 22px; }
+    .btn {
+      border: 0; border-radius: 999px; padding: 14px 16px; font-weight: 800; cursor: pointer;
+      text-align: center; text-decoration: none; display: inline-flex; justify-content: center; color: white;
+    }
+    .gold { background: linear-gradient(180deg,#f5d37a,#c4922a); color: #3b2416; }
+    .red { background: linear-gradient(180deg,#e11d48,#9f1239); }
+    .green { background: linear-gradient(180deg,#15803d,#14532d); }
+    .ghost { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); }
+    .paper {
+      background: linear-gradient(180deg,#fff8e8,#f7e4bf); color: var(--ink);
+      border-radius: 28px; padding: 26px; box-shadow: 0 24px 50px rgba(0,0,0,.28);
+    }
+    .tiny { letter-spacing: .2em; text-transform: uppercase; font-size: 11px; color: #8a5a32; }
+    .cards { display: grid; gap: 12px; margin-top: 28px; }
+    @media (min-width: 800px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+    .card { background: rgba(12,8,16,.62); border: 1px solid rgba(255,255,255,.1); border-radius: 22px; padding: 16px; }
+    .count { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .count div { background: rgba(0,0,0,.28); border-radius: 16px; text-align: center; padding: 10px 6px; }
+    .count strong { display: block; color: var(--gold); font-size: 22px; }
+    input, textarea {
+      width: 100%; border: 1px solid rgba(90,50,20,.16); background: rgba(255,255,255,.78);
+      border-radius: 16px; padding: 12px; color: #2a170f; margin-top: 6px;
+    }
+    .hidden { display: none; }
+    .snow { pointer-events: none; position: fixed; inset: 0; overflow: hidden; z-index: 1; }
+    .flake { position: absolute; top: -20px; color: rgba(255,255,255,.85); animation: fall linear infinite; }
+    @keyframes fall { to { transform: translate3d(30px, 110vh, 0) rotate(180deg); } }
+    footer { margin-top: 28px; text-align: center; color: rgba(255,255,255,.55); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="snow" id="snow"></div>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="seal">✉</div>
+        <div>
+          <div class="display" style="color:#f5d37a;font-size:13px;">North Pole Post</div>
+          <div style="font-size:12px;opacity:.75;">Magical Elf Pen Pals</div>
+        </div>
+      </div>
+      <button class="btn ghost" id="chime" type="button">Magical chimes</button>
+    </header>
+    <section class="hero" id="home">
+      <div>
+        <p class="tiny" style="color:#f5d37a;">Letters from the North Pole</p>
+        <h1 style="font-size:clamp(32px,6vw,56px);line-height:1.1;margin:10px 0 12px;">A magical elf is waiting to be your pen pal.</h1>
+        <p style="max-width:460px;opacity:.82;">Open the letter. Become a friend. Write all year long. The workshop lights are already twinkling for you.</p>
+        <div class="actions">
+          <a class="btn gold" href="#register">Kid Register</a>
+          <a class="btn red" href="#login">Kid Login</a>
+          <a class="btn green" href="#parent">Parent Register</a>
+          <a class="btn ghost" href="#parent">Parent Login</a>
+        </div>
+      </div>
+      <article class="paper">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p class="tiny">Already waiting in the snow</p>
+          <div class="seal">✶</div>
+        </div>
+        <h2 class="script" style="font-size:48px;color:#7a0c1a;margin:10px 0 0;">Dear Friend,</h2>
+        <div class="letter-font" style="font-size:20px;line-height:1.7;">
+          <p>My name is Jingle, and I live in a twinkly loft above Santa’s workshop. The snow is falling sideways tonight, which means it is the perfect time to make a new friend.</p>
+          <p>Would you like to be my pen pal? I can tell you about sled races, cookie emergencies, and the reindeer who steal my mittens.</p>
+          <p>Write me soon. I already tied a red ribbon on an empty envelope with your name on it.</p>
+        </div>
+        <p class="script" style="font-size:36px;color:#14532d;margin-bottom:0;">Your friend, Jingle</p>
+      </article>
+    </section>
+    <section class="cards">
+      <div class="card">
+        <p class="tiny" style="color:#f5d37a;">Countdown</p>
+        <h2 style="margin:8px 0 12px;font-size:22px;">Until Christmas morning</h2>
+        <div class="count" id="count"></div>
+      </div>
+      <div class="card">
+        <h2 style="font-size:22px;margin-top:0;">Write. Play. Celebrate.</h2>
+        <p style="opacity:.75;font-size:14px;">Letters, games, certificates, and little films from the workshop — all in one cozy place.</p>
+      </div>
+      <div class="card">
+        <h2 style="font-size:22px;margin-top:0;">Safe for families</h2>
+        <p style="opacity:.75;font-size:14px;">Parents keep a quiet key to the mailbox. Kids keep the wonder.</p>
+      </div>
+    </section>
+    <section class="hero" style="margin-top:28px;">
+      <div class="paper" id="register">
+        <p class="tiny">Become a pen pal</p>
+        <h2 style="color:#7a0c1a;margin:8px 0;">Kid Register</h2>
+        <label>First name<input id="firstName" placeholder="Noel" /></label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+          <label>Age<input id="age" type="number" min="3" max="12" value="7" /></label>
+          <label>Favorite color<input id="color" placeholder="green" /></label>
+        </div>
+        <label style="display:block;margin-top:8px;">Favorite Christmas activity<input id="activity" placeholder="decorating the tree" /></label>
+        <label style="display:block;margin-top:8px;">4-digit magic PIN<input id="pin" placeholder="1225" maxlength="4" /></label>
+        <button class="btn red" style="margin-top:12px;width:100%;" type="button" onclick="registerKid()">Choose my elf next</button>
+      </div>
+      <div class="paper" id="login">
+        <p class="tiny">Kid mailbox</p>
+        <h2 style="color:#14532d;margin:8px 0;">Kid Login</h2>
+        <label>Mailbox name<input id="mailbox" placeholder="noel1225" /></label>
+        <label style="display:block;margin-top:8px;">Magic PIN<input id="loginPin" placeholder="1225" maxlength="4" /></label>
+        <button class="btn green" style="margin-top:12px;width:100%;" type="button" onclick="loginKid()">Open my mailbox</button>
+        <p id="loginNote" style="font-size:13px;"></p>
+      </div>
+    </section>
+    <section class="paper hidden" id="desk" style="margin-top:24px;">
+      <p class="tiny">Your North Pole mailbox</p>
+      <h2 id="hello" style="color:#7a0c1a;margin:8px 0 12px;"></h2>
+      <p>Jingle is your first workshop friend. Write anything — a joke, a wish, or what you had for snack.</p>
+      <textarea id="letter" rows="6" placeholder="Dear Jingle..."></textarea>
+      <button class="btn red" style="margin-top:12px;" type="button" onclick="sendLetter()">Send my letter</button>
+      <div id="reply" class="letter-font" style="white-space:pre-wrap;font-size:20px;line-height:1.7;margin-top:16px;"></div>
+    </section>
+    <section class="paper" id="parent" style="margin-top:24px;">
+      <p class="tiny">Family door</p>
+      <h2 style="color:#7a0c1a;margin:8px 0;">Parents</h2>
+      <p>Create a grown-up key in the full North Pole Post app to watch over letters, choose reply style, and manage memberships.</p>
+      <div class="actions">
+        <a class="btn green" href="/parent/register">Parent Register</a>
+        <a class="btn ghost" href="/parent/login" style="color:#3b2416;border-color:rgba(59,36,22,.2);">Parent Login</a>
+      </div>
+    </section>
+    <footer>
+      North Pole Post · Elf Pen Pal · Letters from the North Pole · Christmas magic for kids
+    </footer>
+  </div>
+  <script>
+    const snow = document.getElementById("snow");
+    for (let i = 0; i < 36; i++) {
+      const flake = document.createElement("span");
+      flake.className = "flake";
+      flake.textContent = i % 5 === 0 ? "✦" : "❄";
+      flake.style.left = (i * 23) % 100 + "%";
+      flake.style.fontSize = 10 + (i % 10) + "px";
+      flake.style.animationDuration = 8 + (i % 7) + "s";
+      flake.style.animationDelay = (i % 10) * 0.35 + "s";
+      snow.appendChild(flake);
+    }
+    function tick() {
+      const now = new Date();
+      const year = now.getMonth() === 11 && now.getDate() > 25 ? now.getFullYear() + 1 : now.getFullYear();
+      const diff = Math.max(0, new Date(year, 11, 25).getTime() - now.getTime());
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor(diff / 3600000) % 24;
+      const minutes = Math.floor(diff / 60000) % 60;
+      document.getElementById("count").innerHTML = [["Days", days], ["Hours", hours], ["Minutes", minutes]]
+        .map(([label, value]) => `<div><strong>${String(value).padStart(2, "0")}</strong><span style="font-size:10px;letter-spacing:.16em;text-transform:uppercase;opacity:.65;">${label}</span></div>`)
+        .join("");
+    }
+    tick();
+    setInterval(tick, 1000);
+    let chimeOn = false;
+    document.getElementById("chime").onclick = function () {
+      chimeOn = !chimeOn;
+      this.textContent = chimeOn ? "Chimes on" : "Magical chimes";
+      if (chimeOn) {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.value = 880;
+        gain.gain.value = 0.03;
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+        osc.stop(ctx.currentTime + 0.42);
+      }
+    };
+    function registerKid() {
+      const firstName = document.getElementById("firstName").value.trim() || "Friend";
+      const color = document.getElementById("color").value.trim() || "red";
+      const activity = document.getElementById("activity").value.trim() || "decorating";
+      const pin = document.getElementById("pin").value.trim();
+      const mailbox = firstName.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 10) + "1225";
+      localStorage.setItem("np-kid", JSON.stringify({ firstName, color, activity, pin, mailbox }));
+      openDesk({ firstName, color, activity, mailbox });
+    }
+    function loginKid() {
+      const saved = JSON.parse(localStorage.getItem("np-kid") || "null");
+      const mailbox = document.getElementById("mailbox").value.trim();
+      const pin = document.getElementById("loginPin").value.trim();
+      if (!saved || saved.mailbox !== mailbox || saved.pin !== pin) {
+        document.getElementById("loginNote").textContent = "That mailbox name or magic PIN did not open.";
+        return;
+      }
+      openDesk(saved);
+    }
+    function openDesk(kid) {
+      document.getElementById("desk").classList.remove("hidden");
+      document.getElementById("hello").textContent = "Welcome, " + kid.firstName;
+      document.getElementById("desk").scrollIntoView({ behavior: "smooth" });
+    }
+    function sendLetter() {
+      const saved = JSON.parse(localStorage.getItem("np-kid") || "null") || { firstName: "Friend", color: "green", activity: "decorating" };
+      const text = document.getElementById("letter").value.trim();
+      if (text.length < 3) return;
+      document.getElementById("reply").textContent =
+        "Dear " + saved.firstName + ",\n\nGuess what? I already saved you a seat on my fastest sled!\n\nI read your letter by lantern light. You wrote something wonderful, and it made my hat bell ring. I love " + saved.activity + " too. Today I tested a brand-new toy and saved you a " + saved.color + " sprinkle.\n\nWrite me again soon!\n\nYour friend at the North Pole,\nJingle";
+    }
+  </script>
+</body>
+</html>
