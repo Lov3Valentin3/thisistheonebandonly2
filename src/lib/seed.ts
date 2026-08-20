@@ -16,8 +16,10 @@ import { hashSecret } from "@/lib/crypto";
 import { ensureSchema } from "@/lib/ensure-schema";
 let seeded = false;
 export async function ensureSeeded() {
-  if (seeded) return;
-  const [elfCount] = await db.select({ value: count() }).from(elves);
+  if (process.env.NEXT_PHASE === "phase-production-build") return;
+  try {
+    await ensureSchema();
+    const [elfCount] = await db.select({ value: count() }).from(elves);
   if ((elfCount?.value ?? 0) === 0) {
     await db.insert(elves).values(
       ELF_SEEDS.map((elf) => ({
