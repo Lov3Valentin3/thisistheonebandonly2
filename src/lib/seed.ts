@@ -13,6 +13,7 @@ import {
 } from "@/db/schema";
 import { CERTIFICATE_SEEDS, ELF_SEEDS, GAME_SEEDS, QUOTE_SEEDS, VIDEO_SEEDS } from "@/lib/catalog";
 import { hashSecret } from "@/lib/crypto";
+import { ensureSchema } from "@/lib/ensure-schema";
 let seeded = false;
 export async function ensureSeeded() {
   if (seeded) return;
