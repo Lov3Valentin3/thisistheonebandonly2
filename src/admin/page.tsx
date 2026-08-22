@@ -5,8 +5,10 @@ import { children, elves, letters, parents, videos, certificates, quotes } from 
 import { getAdminSession } from "@/lib/auth";
 import { Scene, TopBar } from "@/components/magic";
 import { AdminAdd } from "@/components/forms";
+
 export const metadata = { title: "Admin" };
 export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
   const admin = await getAdminSession();
   if (!admin) redirect("/admin/login");
