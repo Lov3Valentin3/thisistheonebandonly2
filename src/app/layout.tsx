@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Cinzel_Decorative, Cormorant_Garamond, Great_Vibes, Nunito } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ensureSeeded } from "@/lib/seed";
 import "./globals.css";
 const display = Cinzel_Decorative({ subsets: ["latin"], weight: ["700", "900"], variable: "--font-display" });
@@ -77,6 +78,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
