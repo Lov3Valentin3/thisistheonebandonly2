@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --red: #b11226;
   --deep-red: #6d0b18;
